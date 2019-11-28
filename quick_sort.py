@@ -14,8 +14,8 @@ import random
 
 A = [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7, 2]
 
-for x in range(0, 1000000):
-    A.append(randint(-10000, 10000))
+for x in range(0, 1000):
+    A.append(randint(-10, 10))
 
 
 
@@ -43,18 +43,19 @@ def partition(array, low, high):
     return (i-1)
 
 def three_way_partition(array, p, low, high):
-    l = low
-    r = low
+    l = low - 1
+    r = low - 1
     u = high
 
-    while r <= u:
+    while r < u:
+        print('r is: ', r)
         if array[r] < p:
             array[l], array[r] = array[r], array[l]
             l += 1
             r += 1
         elif array[r] > p:
             array[u], array[r] = array[r], array[u]
-            u += 1
+            u -= 1
         else: ## the element is equal to pivot
             r += 1
     return l, r
@@ -73,7 +74,7 @@ def quick_sort(array, low, high):
         # find the pivot value
         p = partition(array, low, high)
         print('p is: ', p, ' low is: ', low, ' high is: ', high)
-        # in case there are duplicates, we need to find left and right
+        # adjust for duplicates
         left, right = three_way_partition(array, p, low, high)
 
         # partition the first half
