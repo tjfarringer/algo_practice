@@ -13,8 +13,8 @@ import random
 
 A = [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7, 2]
 
-# for x in range(0, 10000):
-#     A.append(randint(-10, 10))
+for x in range(0, 100000):
+    A.append(randint(-1000, 1000))
 
 
 
@@ -52,22 +52,25 @@ def merge_two_sorted_lists(left_array: list, right_array: list):
     i = j = 0
 
     while len(merged_array) < merged_array_length:
-        if i != -99 and left_array[i] <= right_array[j]:
-            merged_array.append(left_array[i])
-
-            if (i+1) < len(left_array):
-                i += 1
-            elif (i+1) == len(left_array):
-                i = -99
-
-        elif j != -99 and left_array[i] > right_array[j]:
+        # if we are at the end of the left-array , simply add from the right-array
+        if (i+1) > len(left_array) and (j+1) <= len(right_array):
             merged_array.append(right_array[j])
             j += 1
 
-            if (j+1) < len(right_array):
-                j += 1
-            elif (j+1) == len(right_array):
-                j = -99
+        # if we are at the end of the right-array , simply add from the left-array
+        elif (i+1) <= len(left_array) and (j+1) > len(right_array):
+            merged_array.append(left_array[i])
+            i += 1
+
+
+        elif (i+1) <= len(left_array) and left_array[i] <= right_array[j]:
+            merged_array.append(left_array[i])
+            i += 1
+
+
+        elif (j+1) <= len(right_array) and left_array[i] > right_array[j]:
+            merged_array.append(right_array[j])
+            j += 1
 
     return merged_array
 #
@@ -83,7 +86,10 @@ def merge_sort(array: list):
         # split the lists
         left_array, right_array = partition(array)
         # combine the lists
-        return merge_two_sorted_lists(left_array, right_array)
+        # note that we need to further break down the lists until they are composed of 1 element each
+        merged_lists = merge_two_sorted_lists(merge_sort(left_array), merge_sort(right_array))
+
+        return merged_lists
 
 
 def main():
