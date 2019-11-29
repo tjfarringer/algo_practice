@@ -18,7 +18,7 @@ for x in range(0, 100000):
 
 
 
-def partition(array: list):
+def partition(array: list) -> list:
     '''
     split the list into two blocks
 
@@ -32,7 +32,7 @@ def partition(array: list):
     return array[:midpoint], array[midpoint:]
 
 
-def merge_two_sorted_lists(left_array: list, right_array: list):
+def merge_two_sorted_lists(left_array: list, right_array: list) -> list:
     '''
     This takes to lists
 
@@ -75,7 +75,7 @@ def merge_two_sorted_lists(left_array: list, right_array: list):
     return merged_array
 #
 
-def merge_sort(array: list):
+def merge_sort(array: list) -> list:
     '''
     take a list, sort it into two lists.  Sort each list and then combine the results.
     '''
