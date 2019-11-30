@@ -13,9 +13,22 @@ class graph:
         self.graph = defaultdict(list)
 
     def addEdge(self, u, v):
+        '''
+        Add edge from u to v
+        :param u:
+        :param v:
+        :return:
+        '''
         self.graph[u].append(v)
 
     def DFS_search(self, node, visited: dict):
+        '''
+        Do a depth-first search starting with the node provided. Visited is a dictionary that informs us if the node has been visited in the past.
+
+        :param node:  Node to start the search from
+        :param visited:  Dictionary showing if a node has already been visited
+        :return:
+        '''
 
         # mark the current node as visited
         visited[node] = True
@@ -30,6 +43,9 @@ class graph:
                 self.DFS_search(next_node, visited)
 
     def DFS(self, node):
+        '''
+        Main driver
+        '''
         # Mark all the vertices as not visited
         visited = [False] * (len(self.graph))
 
