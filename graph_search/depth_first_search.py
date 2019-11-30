@@ -38,7 +38,7 @@ class graph:
         self.DFS_search(node, visited)
 
 
-# testing out the algo
+# creating a test graph + searching through it
 g = graph()
 g.addEdge(0, 1)
 g.addEdge(0, 2)
