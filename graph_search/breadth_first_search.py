@@ -6,13 +6,13 @@ from collections import defaultdict
 # Create a queue class, which we will use to determine which node to explore
 class Queue():
 
-    def __init__(self, initial_list):
+    def __init__(self, initial_list=[]):
         self.queue = list(initial_list)
 
-    def add_queue(self, item):
+    def add_to_queue(self, item):
         self.queue.append(item)
 
-    def remove_queue(self):
+    def next_element(self):
         if len(self.queue) < 1:
             None
         else:
@@ -43,47 +43,59 @@ class graph:
         '''
         self.graph[u].append(v)
 
-    def DFS_search(self, node, visited: dict):
+    def BFS_search(self, node, visited: dict, queue: Queue):
         '''
-        Do a depth-first search starting with the node provided. Visited is a dictionary that informs us if the node has been visited in the past.
+        Do a breadth-first search starting with the node provided. Visited is a dictionary that informs us
+         if the node has been visited in the past.
 
         :param node:  Node to start the search from
         :param visited:  Dictionary showing if a node has already been visited
         :return:
         '''
 
-        # mark the current node as visited
-        visited[node] = True
-        print('Just visited: ', node)
+        print('length of queue: ', queue.length_of_queue())
+        while queue.length_of_queue() > 0:
+            # grab next node to explore
+            v = queue.next_element()
+            # set current node to be explored
+            visited[v] = True
 
-        # search for unvisited nodes connected to a previously visited node
-        for next_node in self.graph[node]:
-            print('Current node: ', node, ' Possible next node: ', next_node)
-            if visited[next_node] == False:
-                print('Visited: ', next_node)
-                # dig into the next node
-                self.DFS_search(next_node, visited)
+            print('Currently exploring: ', v)
 
-    def DFS(self, node):
+            for next_node in self.graph[v]:
+                if visited[next_node] == False:
+                    queue.add_to_queue(next_node)
+                    # set it to explored at this stage, otherwise you could add a node to the queue several times
+                    visited[next_node] = True
+
+
+    def BFS(self, node):
         '''
         Main driver
         '''
         # Mark all the vertices as not visited
         visited = [False] * (len(self.graph))
 
-        # Call the recursive helper function
-        # to print DFS traversal
-        self.DFS_search(node, visited)
+        # create our queue class
+        bfs_queue = Queue()
+        # add the initial node to the queue
+        bfs_queue.add_to_queue(node)
+
+        # Call the BFS function
+        self.BFS_search(node, visited, bfs_queue)
 
 
 # creating a test graph + searching through it
 g = graph()
-g.addEdge(0, 1)
-g.addEdge(0, 2)
-g.addEdge(1, 2)
-g.addEdge(2, 0)
-g.addEdge(2, 3)
-g.addEdge(3, 3)
+g.addEdge('s', 'a')
+g.addEdge('s', 'b')
+g.addEdge('a', 'c')
+g.addEdge('b', 'c')
+g.addEdge('b', 'd')
+g.addEdge('c', 'd')
+g.addEdge('c', 'e')
+g.addEdge('d', 'e')
 
-print("Following is DFS from (starting from vertex 2)")
-g.DFS(2)
+
+print("Following is BFS from (starting from vertex 2)")
+g.BFS('s')
