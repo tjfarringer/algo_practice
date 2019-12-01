@@ -21,7 +21,7 @@ class graph:
         '''
         self.graph[u].append(v)
 
-    def DFS_search(self, node, visited: dict):
+    def DFS_search(self, node, visited: list):
         '''
         Do a depth-first search starting with the node provided. Visited is a dictionary that informs us if the node has been visited in the past.
 

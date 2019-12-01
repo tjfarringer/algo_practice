@@ -5,6 +5,9 @@ from collections import defaultdict
 
 # Create a queue class, which we will use to determine which node to explore
 class Queue():
+    '''
+    Obviously we could have used the core python queue class
+    '''
 
     def __init__(self, initial_list=[]):
         self.queue = list(initial_list)
@@ -33,6 +36,12 @@ class graph:
     def __init__(self):
         # default dictionary to store graph
         self.graph = defaultdict(list)
+
+    def return_keys(self):
+        return self.graph.keys()
+
+    def return_values(self):
+        return self.graph.values()
 
     def addEdge(self, u, v):
         '''
@@ -74,7 +83,21 @@ class graph:
         Main driver
         '''
         # Mark all the vertices as not visited
-        visited = [False] * (len(self.graph))
+        # create visited as a dictionary
+        visited = dict()
+
+        # Need to loop through the keys and values because a node might not have a unique edge
+        for k in g.return_keys():
+            visited[k] = False
+
+        for v in g.return_values():
+            # if a node has multiple connections -- that will be a list
+            # need to parse through the list
+            if type(v) == list:
+                for x in v:
+                    visited[x] = False
+            else:
+                visited[v] = False
 
         # create our queue class
         bfs_queue = Queue()
