@@ -54,14 +54,20 @@ class graph:
         self.DFS_search(node, visited)
 
 
-# creating a test graph + searching through it
-g = graph()
-g.addEdge(0, 1)
-g.addEdge(0, 2)
-g.addEdge(1, 2)
-g.addEdge(2, 0)
-g.addEdge(2, 3)
-g.addEdge(3, 3)
+def main():
+    # creating a test graph + searching through it
+    g = graph()
+    g.addEdge(0, 1)
+    g.addEdge(0, 2)
+    g.addEdge(1, 2)
+    g.addEdge(2, 0)
+    g.addEdge(2, 3)
+    g.addEdge(3, 3)
 
-print("Following is DFS from (starting from vertex 2)")
-g.DFS(2)
+    print("Following is DFS from (starting from vertex 2)")
+    g.DFS(2)
+
+
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()

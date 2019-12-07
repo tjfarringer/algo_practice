@@ -1,8 +1,7 @@
-import sys
-print(sys.path)
+from __future__ import absolute_import
 
 # # Import graph class
-from .depth_first_search import graph
+from depth_first_search import graph
 
 # creating a test graph + searching through it
 g = graph()
@@ -19,3 +18,4 @@ g.addEdge(2, 5)
 g.addEdge(5, 8)
 
 
+print(g)
