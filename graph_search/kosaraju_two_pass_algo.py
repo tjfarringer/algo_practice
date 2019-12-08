@@ -5,6 +5,9 @@ from collections import defaultdict
 from depth_first_search import graph
 
 
+# RUN TIME:  O(m + n).  More or less 2x DFS.
+
+
 def reverse_graph(graph_to_reverse: dict) -> dict:
     '''
     This function reverses all the edges in a graph.  Required for step 1 of this algo.
@@ -35,7 +38,7 @@ def DFS_loop(graph):
         if not visited[x]:
             g_reverse.DFS_search(x, visited, finish_time_dict, finish_order_list)
 
-    print(visited)
+    # print(visited)
     # print(finish_time_dict)
 
     # reset the visited dict to False
@@ -45,20 +48,22 @@ def DFS_loop(graph):
 
     # leaders -- vertex from which DFS was called that first discovered that node
     # loop 9 -> 1 (based on finishing time)
-    print('finish time dict is: ', finish_time_dict)
+    # print('finish time dict is: ', finish_time_dict)
 
     for x in reversed(range(0, len(finish_time_dict))):
         if not visited[finish_time_dict[x]]:
 
-            graph.DFS_search(finish_time_dict[x], visited, finish_time_dict, finish_order_list)
+            newly_visited = []
+            graph.DFS_search(finish_time_dict[x], visited, finish_time_dict, finish_order_list, newly_visited)
 
-            for k, v in visited.items():
-                if v:
-                    leader_dict[x].append(k)
+            # print('visited: ', visited, ' newly_visited: ', newly_visited)
+
+            for v in newly_visited:
+                leader_dict[x].append(v)
 
 
-    print(visited)
-    print(leader_dict)
+    # print(visited)
+    print('The strongly connected components are: ', leader_dict)
 
 
 

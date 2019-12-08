@@ -44,7 +44,7 @@ class graph:
         '''
         self.graph[u].append(v)
 
-    def DFS_search(self, node, visited: dict, finish_time_dict: dict, finish_order_list: list):
+    def DFS_search(self, node, visited: dict, finish_time_dict: dict, finish_order_list: list, newly_visited=[]):
         '''
         Do a depth-first search starting with the node provided.
         Visited is a dictionary that informs us if the node has been visited in the past.
@@ -58,39 +58,40 @@ class graph:
 
         # mark the current node as visited
         visited[node] = True
-        print('At: ', node)
+        newly_visited.append(node)
+        # print('At: ', node)
 
         # If there is no next node, increment current_finish_time by one and add to the dict
         if len(self.graph[node]) == 0:
-            print('at: ', node, ' but no linked objects')
-            print('current_finish_time is: ', len(finish_order_list))
+            # print('at: ', node, ' but no linked objects')
+            # print('current_finish_time is: ', len(finish_order_list))
             finish_time_dict[len(finish_order_list)] = node
             finish_order_list.append(node)
-            print('current_finish_time is: ', len(finish_order_list))
+            # print('current_finish_time is: ', len(finish_order_list))
 
         # search for unvisited nodes connected to a previously visited node
         for next_node in self.graph[node]:
-            print('Current node: ', node, ' Possible next node: ', next_node)
+            # print('Current node: ', node, ' Possible next node: ', next_node)
             if visited[next_node] == False:
                 # print('Visited: ', next_node)
                 # dig into the next node
-                self.DFS_search(next_node, visited, finish_time_dict, finish_order_list)
+                self.DFS_search(next_node, visited, finish_time_dict, finish_order_list, newly_visited)
 
                 # if that was the last node, increment current_finish_time by one and add to the dict
                 if next_node == self.graph[node][len(self.graph[node]) - 1]:
-                    print('at: ', node, ' but no unvisited objects - last loop')
-                    print('current_finish_time is: ', len(finish_order_list))
+                    # print('at: ', node, ' but no unvisited objects - last loop')
+                    # print('current_finish_time is: ', len(finish_order_list))
                     finish_time_dict[len(finish_order_list)] = node
                     finish_order_list.append(node)
-                    print('current_finish_time is: ', len(finish_order_list))
+                    # print('current_finish_time is: ', len(finish_order_list))
 
             # if there are no unvisited nodes, increment current_finish_time by one and add to the dict
             elif next_node == self.graph[node][len(self.graph[node])-1]:
-                print('at: ', node, ' but no unvisited objects')
-                print('current_finish_time is: ', len(finish_order_list))
+                # print('at: ', node, ' but no unvisited objects')
+                # print('current_finish_time is: ', len(finish_order_list))
                 finish_time_dict[len(finish_order_list)] = node
                 finish_order_list.append(node)
-                print('current_finish_time is: ', len(finish_order_list))
+                # print('current_finish_time is: ', len(finish_order_list))
 
     def DFS(self, node):
         '''
