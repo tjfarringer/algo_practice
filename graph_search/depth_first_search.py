@@ -51,6 +51,8 @@ class graph:
 
         :param node:  Node to start the search from
         :param visited:  Dictionary showing if a node has already been visited
+        :param finish_time_dict:
+        :param finish_order_list:
         :return:
         '''
 
