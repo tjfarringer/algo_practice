@@ -1,5 +1,5 @@
 
-class Vertex:
+class Vertex():
     def __init__(self, node):
         self.id = node
         self.adjacent = {}
@@ -16,7 +16,7 @@ class Vertex:
     def get_weight(self, neighbor):
         return self.adjacent[neighbor]
 
-class Graph:
+class Graph():
     def __init__(self):
         self.vertex_dict = {}
         self.num_vertices = 0
@@ -46,19 +46,20 @@ class Graph:
         self.vertex_dict[end].add_neighbor(self.vertex_dict[start], cost)
 
     def get_vertices(self):
-        return self.vert_dict.keys()
+        return self.vertex_dict.keys()
 
-#
 def create_graph_from_txt_file(txt_file_location):
 
-    g = Graph
+    test_graph = Graph()
 
-    i = 0
     f = open(txt_file_location, 'r')
     for line in f:
         split_line = line.split()
         vertex_number = split_line[0]
 
-        for
+        test_graph.add_vertex(node=vertex_number)
 
-    print(i)
+        for i in range(1, len(split_line) - 1, 2):
+            test_graph.add_edge(vertex_number, split_line[i], split_line[i+1])
+
+    print(test_graph.get_vertex(1))

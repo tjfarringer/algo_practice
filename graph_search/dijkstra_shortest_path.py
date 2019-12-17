@@ -13,6 +13,6 @@ def dijkstra_shortest_path(graph, inital_element):
     processed_vertex.add(inital_element)
     distances[inital_element] = 0
 
-    while processed_vertex != graph.return_all_nodes():
+    # while processed_vertex != graph.return_all_nodes():
 
-# create_graph_from_txt_file('/Users/talmadgefarringer/Downloads/dijkstraData.txt')
+graph_utility.create_graph_from_txt_file('/Users/talmadgefarringer/Downloads/dijkstraData.txt')
