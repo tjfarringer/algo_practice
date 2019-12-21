@@ -62,4 +62,4 @@ def create_graph_from_txt_file(txt_file_location):
         for i in range(1, len(split_line) - 1, 2):
             test_graph.add_edge(vertex_number, split_line[i], split_line[i+1])
 
-    print(test_graph.get_vertex(1))
+    # print(test_graph.get_vertex(1))
