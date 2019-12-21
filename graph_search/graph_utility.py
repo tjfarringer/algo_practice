@@ -50,16 +50,18 @@ class Graph():
 
 def create_graph_from_txt_file(txt_file_location):
 
-    test_graph = Graph()
+    graph = Graph()
 
     f = open(txt_file_location, 'r')
     for line in f:
         split_line = line.split()
         vertex_number = split_line[0]
 
-        test_graph.add_vertex(node=vertex_number)
+        graph.add_vertex(node=vertex_number)
 
         for i in range(1, len(split_line) - 1, 2):
-            test_graph.add_edge(vertex_number, split_line[i], split_line[i+1])
+            graph.add_edge(vertex_number, split_line[i], split_line[i+1])
 
     # print(test_graph.get_vertex(1))
+
+    return graph
