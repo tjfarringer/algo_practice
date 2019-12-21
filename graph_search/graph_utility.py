@@ -48,6 +48,18 @@ class Graph():
     def get_vertices(self):
         return self.vertex_dict.keys()
 
+
+
+def remove_comma(s: str):
+    try:
+        s = s.replace(',', '')
+    except:
+        pass
+
+    return s
+
+
+
 def create_graph_from_txt_file(txt_file_location):
 
     graph = Graph()
@@ -55,13 +67,14 @@ def create_graph_from_txt_file(txt_file_location):
     f = open(txt_file_location, 'r')
     for line in f:
         split_line = line.split()
-        vertex_number = split_line[0]
+        vertex_number = int(split_line[0])
 
-        graph.add_vertex(node=vertex_number)
+        for edge_tuple in split_line[1:len(split_line) - 1]:
+            split_tuple = edge_tuple.split(",")
+            vertex = split_tuple[0]
+            length = split_tuple[1]
+            graph.add_edge(int(vertex_number), int(vertex), int(length))
 
-        for i in range(1, len(split_line) - 1, 2):
-            graph.add_edge(vertex_number, split_line[i], split_line[i+1])
-
-    # print(test_graph.get_vertex(1))
+    # print(graph.get_vertex(1).get_connections())
 
     return graph
